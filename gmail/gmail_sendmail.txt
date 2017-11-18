@@ -1,0 +1,62 @@
+*** Settings ***
+Library    Selenium2Library
+Test Teardown    Close Browser
+
+*** Variables ****
+${url}    https://accounts.google.com
+${username}    email
+${password}    password
+${receiver}    receiver mail
+${topic}    topic
+${detail}    detail
+
+*** Test Cases ***
+Send mail from gamil
+
+  Access to Gmail website
+  Input username and click continue button
+  Wait for input password form visible
+  Input password and click login button
+  Click icon Gmail from menu
+  Wait for compose button showup
+  Click compose button
+  Wait for message dialog showup
+  Input receiver, topic, detial on textarea
+  Click send mail button
+
+*** Keywords ***
+Access to Gmail website
+  Open Browser    ${url}    gc
+
+Input username and click continue button
+  Input Text    //input[@id="Email"]    ${username}
+  Click Button    //input[@id="next"]
+
+Wait for input password form visible
+  Wait Until Element Is Visible    //input[@id="Passwd"]    3
+
+Input password and click login button
+  Input Password    //input[@id="Passwd"]    ${password}
+  Click Button    //input[@id="signIn"]
+
+Click icon Gmail from menu
+  Click Link    //a[@title="Google apps"]
+  Click Link    //a[@data-pid="23"]
+
+Wait for compose button showup
+  Wait Until Element Is Visible    //div[@role="button"]    3
+
+Click compose button
+  Click Element    //div[@class="z0"]/div[@role="button"]
+
+Wait for message dialog showup
+  Wait Until Element Is Visible    //div[@class="aYF"]    3
+
+Input receiver, topic, detial on textarea
+  Input Text    //textarea[@id=":mo"]    ${receiver}
+  Input Text    //input[@id=":m8"]    ${topic}
+  Click Element    //div[@aria-label="Message Body"]
+  Input Text    //div[@aria-label="Message Body"]    ${detail}
+
+Click send mail button
+  Click Element    //div[@id=":ly"]

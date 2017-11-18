@@ -1,0 +1,21 @@
+*** Settings ***
+Library    Selenium2Library
+***Test Teardown    Close Browser
+
+*** Test Cases ***
+Google Search
+  when i open google.com
+  input house in search form
+  click search
+  the result should be about house
+
+*** Keywords ***
+when i open google.com
+  open browser    http://www.google.com    gc
+input house in search form
+  input text    //input[@id='lst-ib']    บ้าน
+click search
+  click button    //button[@name='btnG']
+the result should be about house
+  Wait Until Page Contains    บ้าน
+

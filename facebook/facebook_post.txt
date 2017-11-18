@@ -1,0 +1,43 @@
+*** Settings ***
+Library    Selenium2Library
+Test Teardown    Close Browser
+
+*** Variables ****
+${url}    https://www.facebook.com
+${message}    test post from robot
+${username}    username
+${password}    password
+
+*** Test Cases ***
+Post on Facebook Timeline
+
+  Access to Facebook with Google Chrome
+  Input username and password in input form
+  Click login button for authen to Facebook account
+  Input message in textarea form
+  Wait for popup dialog
+  Click for post on own timeline
+  Check the result on timeline
+
+*** Keywords ***
+Access to Facebook with Google Chrome
+  Open Browser    ${url}    gc
+
+Input username and password in input form
+  Input Text    //input[@id="email"]    ${username}
+  Input Password    //input[@id="pass"]    ${password}
+
+Click login button for authen to Facebook account
+  Click Button    //input[@value="เข้าสู่ระบบ"]
+
+Input message in textarea form
+  Input Text    //textarea[@class="_3en1 _480e"]    ${message}
+
+Wait for popup dialog
+  Wait Until Element Is Visible    //button[@type="submit"]    1
+
+Click for post on own timeline
+  Click Button    //button[@type="submit"]
+
+Check the result on timeline
+  Wait Until Page Contains    ${message}
