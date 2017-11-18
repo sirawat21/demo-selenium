@@ -1,5 +1,5 @@
-#Demo Selenium script#
-##Detail##
+# Demo Selenium script #
+## Detail ##
 This project is for simple testing script with Selenium Library on Robot Framework with Python version 2.7
 ## Rrequirements ##
 - [Python 2.7] (https://www.python.org/download/releases/2.7/)
